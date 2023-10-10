@@ -30,29 +30,24 @@ pub fn random_word(number: i32) -> String {
     return word[number];
 }
 
-let mut nonceNum = HashSet::new();
-let mut blocknum: i32 = 0;
 
 
 impl Block {
     pub fn newBlock(block_number: i32,nonce: i32, timestamp: i32, hash: String,prev_hash: String,) -> Block {
         
-        block_number = blocknum++;
+        let mut blocknum: i32 = 0; // block number
+        block_number = blocknum + 1;
+        
+        let mut nonceNum = HashSet::new();
+        
         let mut rng = rand::thread_rng();
         nonce = rng.gen_range(999..99999);  // nonce part of the block 
-        let newNonce = false;
-
-        while(new_Nonce){
-
-            if !nonceNum.contains(nonce) {
-                let mut new_Nonce = rand::thread_rng().gen_range(999..99999);
-    
-            } else {
-                !nonceNum.insert(nonce);
-                new_Nonce = true;
-            }
-
+        if !nonceNum.contains(nonce) {
+            let mut new_Nonce = rand::thread_rng().gen_range(999..99999);
+        } else {
+            !nonceNum.insert(nonce);
         }
+
         
         genhash = Sha256::new(); // hashing part of the block
         let mut key = random_word(2);
