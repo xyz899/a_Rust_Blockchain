@@ -2,7 +2,7 @@ extern crate sha2;
 use sha2::{Sha256, Digest};
 use std::{string::String, io::stdin};
 
-fn main() {
+fn hash() -> String {
     let mut hash =  Sha256::new();
 
     println!("Message to hash : ");
@@ -12,6 +12,7 @@ fn main() {
     hash.update(message);
 
     let result = hash.finalize();
-    println!("Hashed : {:x}", result);
+    // println!("Hashed : {:x}", result);
+    result;
 
 }

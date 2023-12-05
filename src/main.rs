@@ -3,6 +3,7 @@ use sha2::{Sha256, Digest};
 use rand::Rng;
 use std::collections::HashSet;
 use std::time::{SystemTime, UNIX_EPOCH};
+mod hash;
 
 
 // Block and Blockchain structures
@@ -20,15 +21,15 @@ pub struct Blockchain {
 }
 
 
-pub fn random_word(number: i32) -> String {
-    if (number < 0 || number >= 5){
-        panic!("Not possible");
+// pub fn random_word(number: i32) -> String {
+//     if number < 0 || number >= 5 {
+//         panic!("Not possible");
 
-    }
+//     }
     
-    let mut word: [&str; 5] = ["Fries","Time","Reality","Rich","Work"];
-    return word[number];
-}
+//     let mut word: [&str; 5] = ["Fries","Time","Reality","Rich","Work"];
+//     return word[number];
+// }
 
 
 // impl <StructName> = serves to use a defined struct
@@ -42,6 +43,7 @@ impl Blockchain {
     self.chain.push(new_block);
    }
 
+   // we want to change the hash and prev_hash to Sha256 
     pub fn new_block(block_number: i32,nonce: i32, timestamp: i32, hash: String,prev_hash: String) -> Block {
         
         let mut blocknum: i32 = 0; // block number
@@ -71,21 +73,29 @@ impl Blockchain {
         // since_the_epoch is to retrive the unix epoch meaning duration since plus an expect in case of an error with the library
         // timestamp to convert in seconds i64
         let since_the_epoch = start.duration_since(UNIX_EPOCH).expect("Error while fetching the block timestamp");
-        let timestamp = since_the_epoch.as_secs() as i64;
+        let timestamp = since_the_epoch.as_secs() as i32;
 
 
-        prev_hash = match zph_blockchain.last() {
-            Some(value) => value.to_string(),
-            None => println!("The vector is empty"),
-        };
+        prev_hash = ("TODO").to_string();
+        
+        //     match Blockchain.last() {
+        //     Ok(value) => { 
+        //         value.to_string()
+        //     },
+        //     Err(err) => {
+        //         ("The vector is empty").to_string()
+        //     },
+        // };
 
         // =notice= : genhash to initialize sha256, hashing part of a block
         // takes an update with format! to formatted string 
         let mut genhash = Sha256::new();
-        genhash.update(format!("{}{}{}", block_number, nonce, timestamp, prev_hash));
+        genhash.update(format!("{}{}{}{}", block_number, nonce, timestamp, prev_hash));
     
         // finally finalize to output a hash of 64 characters 
-        hash = genhash.finalize();
+        // TO DO FINALIZE NOT WORKING HERE
+        // hash = genhash;
+        hash = ("TODO").to_string();
 
         // Pushing everything to new Block
         Block {
@@ -105,8 +115,8 @@ fn main() {
     let mut zph_blockchain = Blockchain::new();
 
     for _ in 0..10 {
-        let new_block = zph_blockchain.new_block();
-        zph_blockchain.add_block(new_block);
+        // let new_block = zph_blockchain.add_block();
+        // zph_blockchain.add_block(new_block);
 
     }
 
