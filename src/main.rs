@@ -39,7 +39,7 @@ impl Blockchain {
     Blockchain {chain: Vec::new()}
    }
 
-   pub fn add_block(&mut self, new_block: Block)  {
+   pub fn add_block(&mut self, new_block: Block){
     self.chain.push(new_block);
    }
 
