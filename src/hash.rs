@@ -1,8 +1,8 @@
 extern crate sha2;
-use sha2::{Sha256, Digest};
+use sha2::{digest::generic_array::GenericArray, Digest, Sha256};
 use std::{string::String, io::stdin};
 
-fn hash() -> String {
+fn hash() {
     let mut hash =  Sha256::new();
 
     println!("Message to hash : ");
